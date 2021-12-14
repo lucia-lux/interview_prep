@@ -30,12 +30,13 @@ def my_meds_reader_w_keys(s,**kwargs):
             # names of drugs to search in text
             meds_to_search.update(new_entries)
     
-    # lower case everything
-    s = s.lower()
 
     # split on empty line\line containing only whitespaces.
     # retain string content prior to first split only (ignore anything below \n\s*\n)
     s = re.split("\n\s*\n",s)[0]
+
+    # lower case everything
+    s = s.lower()
 
     # split into individual lines
     s = s.split('\n')
@@ -44,12 +45,10 @@ def my_meds_reader_w_keys(s,**kwargs):
     s_split = [f.split(" ",1) for f in s]
 
     # replace medication names with key (str)]
-    meds_dose_list=[[meds_to_search[key],f[1]]
+    meds_dose_list=[[meds_to_search[f[0]],f[1]]
                     if len(f)>1 else 
-                    [meds_to_search[key],""]
+                    [meds_to_search[f[0]],""]
                     for f in s_split
-                    for key in meds_to_search.keys()
-                    if key in f]
+                    if f[0] in meds_to_search.keys()]
     
-
     return meds_dose_list
