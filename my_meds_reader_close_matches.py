@@ -1,7 +1,7 @@
 # Purpose:  Extract medication/dosage info, check for potential spelling issues.
 # Version:  1
 # Author:   Luzia Troebinger
-# Status:   Active
+# Status:   Closed
 # Created:  14-Dec-2021
 
 import re
@@ -26,13 +26,13 @@ def my_meds_reader_close_matches(s):
     """
     # names of drugs to search in text
     meds_to_search = {'aspirin': 2, 'paracetamol': 1,'panadol': 1,'penicillin': 3}
-    
-    # lower case everything
-    s = s.lower()
 
     # split on empty line\line containing only whitespaces.
-    # retain string content prior to first split only (ignore anything below \n\s*\n)
-    s = re.split("\n\s*\n",s)[0]
+    # retain string content prior to first split only
+    s = re.split("\n\s*\n",s.lstrip())[0]
+
+    # lower case everything
+    s = s.lower()
 
     # split into individual lines
     s = s.split('\n')

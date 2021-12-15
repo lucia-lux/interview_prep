@@ -1,7 +1,7 @@
 # Purpose:  Extract medication/dosage info, allow additional key-value pairs as input.
 # Version:  1
 # Author:   Luzia Troebinger
-# Status:   Active
+# Status:   Closed
 # Created:  13-Dec-2021
 
 import re
@@ -33,7 +33,7 @@ def my_meds_reader_w_keys(s,**kwargs):
 
     # split on empty line\line containing only whitespaces.
     # retain string content prior to first split only (ignore anything below \n\s*\n)
-    s = re.split("\n\s*\n",s)[0]
+    s = re.split("\n\s*\n",s.lstrip())[0]
 
     # lower case everything
     s = s.lower()
